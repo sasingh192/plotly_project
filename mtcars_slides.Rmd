@@ -1,0 +1,33 @@
+---
+title: "Mtcars Analysis"
+author: "Saurabh Singh"
+date: "7/14/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, loadlibrary, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(plotly)
+```
+
+## Introduction
+Mtcars data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). We will analyze mpg vs wt for both manual and auto transmission cars. The final plot will be rendered using plotly to make it interactive.
+
+```{r, eda}
+head(mtcars)
+```
+## Plot mpg vs wt 
+Following plots shows mpg vs wt for auto and manual transmission cars.
+The data points have been color coded using cyl variable.
+Finally, the ggplot has been converted to plotly to make it interactive.
+```{r, plot, fig.height=3.7}
+g <- ggplot(mtcars, aes(x=wt, y=mpg, color=factor(cyl)))
+g <- g + geom_point()
+g <- g + facet_grid(. ~ am)
+ggplotly(g)
+```
